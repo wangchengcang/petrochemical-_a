@@ -51,23 +51,39 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
-	var odiv = $("<div id='od'>").text('还未添加事项')
-
-	$('#ul').before(odiv)
+	abc()
+	function abc(){
+		if($('#ul').html('')){
+		// alert(123)
+			var odiv = $("<div class='od'>").text('还未添加事项')
+			$('#ul').before(odiv)
+		}
+	}
+	
+	// var odiv = $("<div id='od'>").text('还未添加事项')
+	// $('#ul').before(odiv)
 	$('#add').on('click',function(){
-		$('#od').hide()
+		// abc()
+		$('.od').hide()
 		// $('#ul').before(' ')
 		var put = $('#put').val()
 		var li = $("<li>").html(`<p class='fl '>${put}</p><button class='fr'>完成</button>`)
 		$('#ul').append(li)
+		// abc()
 	})
 	$('#ul').on('click','button',function(){
+		if($('#ul').html('')){
+			abc()
+		}else{
+			$('.od').hide()
+		}
 		$(this).parent().hide()
 		var p = $(this).parent().find("p").text()
 		var li = $("<li>").html(`<p class='fl'>${p}</p><button class='fr del'>删除</button><button class='fr wei'>未完成</button>`)
 		$('#ol').append(li)
 	})
 	$('#ol').on('click','.wei',function(){
+		$('.od').hide()
 		$(this).parent().hide()		
 		var p = $(this).parent().find("p").text()
 		var li = $("<li>").html(`<p class='fl ' >${p}</p><button class='fr'>完成</button>`)
