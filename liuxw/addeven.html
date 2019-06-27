@@ -72,23 +72,23 @@
         <li><span>${$(".txt").val()}</span><input class="del one" type="button" value="ok"></li>
         `);
             $(".ul1").append(li);
-            $(li).find(".one").on("click", function () {
-                var li = $(`
+        })
+        $(".ul1").on("click", "li .one", function () {
+            var li = $(`
         <li><span>${$(this).parent().find("span").text()}</span><input class="del two three" type="button" value="not ok"><input class="del two" type="button" value="del"></li>
         `);
-                $(li).find(".two").on("click", function () {
-                    $(this).parent().remove();
-                })
-                $(li).find(".three").on("click", function () {
-                    var wei = $(`
-        <li><span>${$(this).parent().find("span").text()}</span><input class="del one" type="button" value="ok"></li>
-        `);
-                    $(this).parent().remove();
-                    $(".ul1").append(wei);
-                })
-                $(".ul2").append(li);
-                $(this).parent().remove();
-            })
+            $(".ul2").append(li);
+            $(this).parent().remove();
+        })
+        $(".ul2").on("click", "li .two", function () {
+            $(this).parent().remove();
+        })
+        $(".ul2").on("click", "li .three", function () {
+            var wei = $(`
+             <li><span>${$(this).parent().find("span").text()}</span><input class="del one" type="button" value="ok"></li>
+             `);
+            $(this).parent().remove();
+            $(".ul1").append(wei);
         })
     </script>
 </body>
