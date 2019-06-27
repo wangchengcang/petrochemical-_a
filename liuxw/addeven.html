@@ -58,37 +58,59 @@
         <div class="wei">
             未完成
             <ul class="ul1" style="min-height: 100px;">
+                还未添加事件
             </ul>
         </div>
         <div class="ok">
             已完成
             <ul class="ul2" style="min-height: 100px;">
+                还未添加事件
             </ul>
         </div>
     </div>
     <script>
         $(".add").on("click", function () {
+            if($(".ul1 li").length==0){
+                $(".ul1").empty();
+            }
             var li = $(`
         <li><span>${$(".txt").val()}</span><input class="del one" type="button" value="ok"></li>
         `);
+        
             $(".ul1").append(li);
         })
         $(".ul1").on("click", "li .one", function () {
+            if($(".ul2 li").length==0){
+                $(".ul2").empty();
+            }
             var li = $(`
         <li><span>${$(this).parent().find("span").text()}</span><input class="del two three" type="button" value="not ok"><input class="del two" type="button" value="del"></li>
         `);
             $(".ul2").append(li);
             $(this).parent().remove();
+            if($(".ul1 li").length==0){
+                $(".ul1").html("还未添加事件");
+            }
         })
         $(".ul2").on("click", "li .two", function () {
             $(this).parent().remove();
+            if($(".ul2 li").length==0){
+                $(".ul2").html("还未添加事件");
+            }
         })
         $(".ul2").on("click", "li .three", function () {
             var wei = $(`
              <li><span>${$(this).parent().find("span").text()}</span><input class="del one" type="button" value="ok"></li>
              `);
             $(this).parent().remove();
+            if($(".ul1 li").length==0){
+                $(".ul1").empty();
+            }
             $(".ul1").append(wei);
+
+            if($(".ul2 li").length==0){
+                $(".ul2").html("还未添加事件");
+            }
         })
     </script>
 </body>
