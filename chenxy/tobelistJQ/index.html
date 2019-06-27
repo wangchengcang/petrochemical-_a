@@ -61,7 +61,7 @@
                 </li>
             `);
             $('.dblist').prepend(li);
-            $('.dblist').on('click','.finish',function(){
+            $('.finish').on('click',function(){
                 $(this).removeClass().attr('class','remove').html('删除');
                 var button = $(`<button class="no">未完成</button>`)
                 $(this).parent().append(button);
