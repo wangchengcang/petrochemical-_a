@@ -7,12 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        *{
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             /* list-style: none; */
         }
+
         .content {
             width: 500px;
             height: auto;
@@ -40,30 +41,42 @@
             font-size: 16px;
         }
 
-        #ulMiddle li{
+        #ulMiddle li {
             /* display: inline-block; */
             line-height: 50px;
         }
-        #ulMiddle li p{
+
+        #ulMiddle li p {
             line-height: 50px;
             float: left;
         }
-        #ulMiddle li button{
+
+        #ulMiddle li button {
             float: right;
             line-height: 40px;
         }
 
 
-        #ulBottom li{
+        #ulBottom li {
             line-height: 50px;
         }
-        #ulBottom li p{
+
+        #ulBottom li p {
             line-height: 50px;
             float: left;
         }
-        #ulBottom li button{
+
+        #ulBottom li button {
             float: right;
             line-height: 40px;
+        }
+        .addDiv{
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            background: cyan;
+            padding-left: 20px;
+            box-sizing: border-box;
         }
     </style>
 </head>
@@ -75,7 +88,7 @@
             <button style="width:100%;height: 30px;" id="addObject">添加到代办事件</button>
         </div>
         --待办事件--
-        <div class="middle">
+        <div class="middle" id="middles">
             <ul id="ulMiddle" style="line-height:50px;"></ul>
 
         </div>
@@ -87,8 +100,17 @@
 
     <script src="jquery.js"></script>
     <script>
+        // 还未添加事项
+        var addDiv = $('<div>');
+        addDiv.addClass('addDiv');
+        var divText = addDiv.text('还未添加事项');
+        console.log(divText)
+        $('#middles').prepend(addDiv);
+
+
         // 添加到代办事件
         $('#addObject').click(() => {
+            $('.addDiv').hide();
             var ipt = $('#ipt').val();
             console.log(ipt)
             var oLi = $('<li>')
@@ -97,14 +119,15 @@
             //     'line-height': '40px'
             // });
             oLi.html(`<p>${ipt}</p><button>完成</button>`);
-            
+
 
             $('#ulMiddle').append(oLi);
 
         })
 
 
-        $('#ulMiddle').on('click','button',function(){
+        // 代办事件
+        $('#ulMiddle').on('click', 'button', function () {
             $(this).parent().hide();
             var op = $(this).parent().find('p').text();
             var bottomli = $('<li></li>').html(`<p>${op}</p><button class="deleteBtn">删除</button><button class="nochange">未完成</button>`);
@@ -112,16 +135,19 @@
             $('#ulBottom').append(bottomli);
 
         })
-        $('#ulBottom').on('click','.nochange',function(){
+
+        // 完成事件
+        $('#ulBottom').on('click', '.nochange', function () {
             $(this).parent().hide();
             var op = $(this).parent().find('p').text();
             var bottomli = $('<li></li>').html(`<p>${op}</p><button>完成</button>`);
             console.log(op);
             $('#ulMiddle').append(bottomli);
-            
+
         })
-        
-        $('#ulBottom').on('click','.deleteBtn',function(){
+
+        // 点击删除，让完成里面的li消失
+        $('#ulBottom').on('click', '.deleteBtn', function () {
             // alert(12)
             $(this).parent().hide();
         })
